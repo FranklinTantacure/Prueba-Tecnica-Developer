@@ -30,6 +30,7 @@ namespace ProyectoVenta.Controllers
                 return View();
             }
 
+            //token de autenticación y el rol segun corresponda
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, ouser.Correo),
@@ -38,7 +39,7 @@ namespace ProyectoVenta.Controllers
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
+            //inicio de sesion
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity));
 
             //SESIONES
@@ -53,6 +54,7 @@ namespace ProyectoVenta.Controllers
             await HttpContext.SignOutAsync( CookieAuthenticationDefaults.AuthenticationScheme);
 
             return RedirectToAction("Index","Acceso");
+
         }
     }
 }
